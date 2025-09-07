@@ -1,0 +1,122 @@
+.button {
+  @apply inline-flex items-center justify-center rounded-lg font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  position: relative;
+}
+
+/* Variants */
+.primary {
+  @apply bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800;
+  @apply focus-visible:ring-blue-500;
+  @apply shadow-sm hover:shadow-md;
+}
+
+.secondary {
+  @apply bg-gray-100 text-gray-900 hover:bg-gray-200 active:bg-gray-300;
+  @apply focus-visible:ring-gray-500;
+}
+
+.outline {
+  @apply border border-gray-300 bg-white text-gray-700;
+  @apply hover:bg-gray-50 active:bg-gray-100;
+  @apply focus-visible:ring-gray-500;
+}
+
+.ghost {
+  @apply text-gray-700 hover:bg-gray-100 active:bg-gray-200;
+  @apply focus-visible:ring-gray-500;
+}
+
+.error {
+  @apply bg-red-500 text-white hover:bg-red-600 active:bg-red-700;
+  @apply focus-visible:ring-red-500;
+  @apply shadow-sm hover:shadow-md;
+}
+
+/* Sizes */
+.sm {
+  @apply px-3 py-1.5 text-sm;
+  @apply gap-1.5;
+}
+
+.md {
+  @apply px-4 py-2 text-sm;
+  @apply gap-2;
+}
+
+.lg {
+  @apply px-6 py-3 text-base;
+  @apply gap-2;
+}
+
+/* Loading state */
+.loading {
+  @apply cursor-not-allowed;
+}
+
+.spinner {
+  @apply w-4 h-4 animate-spin;
+  margin-right: 0.5rem;
+}
+
+.loadingText {
+  @apply opacity-70;
+}
+
+/* Hover effects */
+.button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+.button:not(:disabled):active {
+  transform: translateY(0);
+}
+
+/* Focus styles */
+.button:focus-visible {
+  @apply ring-2 ring-offset-2;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .button:not(:disabled):hover {
+    transform: none;
+  }
+  
+  .lg {
+    @apply px-5 py-2.5 text-sm;
+  }
+}
+
+/* Icon button variant */
+.iconButton {
+  @apply p-2;
+  aspect-ratio: 1;
+}
+
+.iconButton.sm {
+  @apply p-1.5;
+}
+
+.iconButton.lg {
+  @apply p-3;
+}
+
+/* Button group styles */
+.buttonGroup {
+  @apply inline-flex;
+}
+
+.buttonGroup .button:not(:first-child) {
+  @apply -ml-px rounded-l-none;
+}
+
+.buttonGroup .button:not(:last-child) {
+  @apply rounded-r-none;
+}
+
+.buttonGroup .button:focus {
+  @apply relative z-10;
+}

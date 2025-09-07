@@ -1,0 +1,199 @@
+.badge {
+  @apply inline-flex items-center justify-center font-medium rounded-full;
+  @apply transition-all duration-200;
+}
+
+/* Variants */
+.primary {
+  @apply bg-primary-100 text-primary-800 border border-primary-200;
+}
+
+.secondary {
+  @apply bg-gray-100 text-gray-800 border border-gray-200;
+}
+
+.success {
+  @apply bg-green-50 text-green-600 border border-green-200;
+}
+
+.warning {
+  @apply bg-yellow-50 text-yellow-600 border border-yellow-200;
+}
+
+.error {
+  @apply bg-red-50 text-red-600 border border-red-200;
+}
+
+.info {
+  @apply bg-blue-50 text-blue-600 border border-blue-200;
+}
+
+/* Sizes */
+.sm {
+  @apply px-2 py-0.5 text-xs;
+  @apply min-h-[20px];
+}
+
+.md {
+  @apply px-2.5 py-1 text-xs;
+  @apply min-h-[24px];
+}
+
+.lg {
+  @apply px-3 py-1.5 text-sm;
+  @apply min-h-[28px];
+}
+
+/* Solid variants */
+.primary.solid {
+  @apply bg-primary-600 text-white border-primary-600;
+}
+
+.secondary.solid {
+  @apply bg-gray-600 text-white border-gray-600;
+}
+
+.success.solid {
+  @apply bg-success-600 text-white border-success-600;
+}
+
+.warning.solid {
+  @apply bg-warning-600 text-white border-warning-600;
+}
+
+.error.solid {
+  @apply bg-error-600 text-white border-error-600;
+}
+
+.info.solid {
+  @apply bg-blue-600 text-white border-blue-600;
+}
+
+/* Outline variants */
+.primary.outline {
+  @apply bg-transparent text-primary-600 border-primary-600;
+}
+
+.secondary.outline {
+  @apply bg-transparent text-gray-600 border-gray-600;
+}
+
+.success.outline {
+  @apply bg-transparent text-success-600 border-success-600;
+}
+
+.warning.outline {
+  @apply bg-transparent text-warning-600 border-warning-600;
+}
+
+.error.outline {
+  @apply bg-transparent text-error-600 border-error-600;
+}
+
+.info.outline {
+  @apply bg-transparent text-blue-600 border-blue-600;
+}
+
+/* Dot variant */
+.badge.dot {
+  @apply relative pl-4;
+}
+
+.badge.dot::before {
+  content: '';
+  @apply absolute left-1.5 top-1/2 transform -translate-y-1/2;
+  @apply w-1.5 h-1.5 rounded-full;
+}
+
+.primary.dot::before {
+  @apply bg-primary-600;
+}
+
+.secondary.dot::before {
+  @apply bg-gray-600;
+}
+
+.success.dot::before {
+  @apply bg-success-600;
+}
+
+.warning.dot::before {
+  @apply bg-warning-600;
+}
+
+.error.dot::before {
+  @apply bg-error-600;
+}
+
+.info.dot::before {
+  @apply bg-blue-600;
+}
+
+/* Removable badge */
+.removable {
+  @apply pr-1;
+}
+
+.removeButton {
+  @apply ml-1 p-0.5 rounded-full hover:bg-black hover:bg-opacity-10;
+  @apply transition-colors duration-200;
+}
+
+.removeButton:hover {
+  @apply bg-opacity-20;
+}
+
+/* Notification badge (for counts) */
+.notification {
+  @apply min-w-[20px] h-5 px-1.5;
+  @apply text-xs font-semibold;
+  @apply bg-error-500 text-white;
+  @apply rounded-full;
+}
+
+.notification.large {
+  @apply min-w-[24px] h-6 px-2;
+  @apply text-sm;
+}
+
+/* Pulse animation for notifications */
+.notification.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Status badges */
+.status {
+  @apply uppercase tracking-wide font-semibold;
+}
+
+.status.online {
+  @apply bg-green-100 text-green-800;
+}
+
+.status.offline {
+  @apply bg-gray-100 text-gray-800;
+}
+
+.status.busy {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+.status.away {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .lg {
+    @apply px-2.5 py-1 text-xs;
+  }
+}

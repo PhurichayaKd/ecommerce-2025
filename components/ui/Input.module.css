@@ -1,0 +1,139 @@
+.inputGroup {
+  @apply w-full;
+}
+
+.label {
+  @apply block text-sm font-medium text-gray-700 mb-1;
+}
+
+.required {
+  @apply text-error-500 ml-1;
+}
+
+.inputWrapper {
+  @apply relative;
+}
+
+.input {
+  @apply flex h-10 w-full rounded-lg border border-gray-300 bg-white px-3 py-2;
+  @apply text-sm ring-offset-white;
+  @apply file:border-0 file:bg-transparent file:text-sm file:font-medium;
+  @apply placeholder:text-gray-500;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2;
+  @apply disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-50;
+  @apply transition-all duration-200;
+}
+
+.input:hover:not(:disabled) {
+  @apply border-gray-400;
+}
+
+.hasLeftIcon {
+  @apply pl-10;
+}
+
+.hasRightIcon {
+  @apply pr-10;
+}
+
+.leftIcon {
+  @apply absolute left-3 top-1/2 transform -translate-y-1/2;
+  @apply text-gray-400 pointer-events-none;
+  @apply w-4 h-4;
+}
+
+.rightIcon {
+  @apply absolute right-3 top-1/2 transform -translate-y-1/2;
+  @apply text-gray-400;
+  @apply w-4 h-4;
+}
+
+.error {
+  @apply border-error-500 focus-visible:ring-error-500;
+}
+
+.error:hover {
+  @apply border-error-600;
+}
+
+.disabled {
+  @apply bg-gray-50 text-gray-500 cursor-not-allowed;
+}
+
+.helperText {
+  @apply mt-1 text-xs text-gray-600;
+}
+
+.errorText {
+  @apply text-error-500;
+}
+
+/* Input variants */
+.inputLarge {
+  @apply h-12 px-4 text-base;
+}
+
+.inputSmall {
+  @apply h-8 px-2 text-xs;
+}
+
+/* Search input specific styles */
+.searchInput {
+  @apply pl-10;
+}
+
+.searchIcon {
+  @apply absolute left-3 top-1/2 transform -translate-y-1/2;
+  @apply text-gray-400 w-4 h-4;
+}
+
+/* Number input styles */
+.numberInput {
+  @apply text-right;
+}
+
+/* Textarea styles */
+.textarea {
+  @apply min-h-[80px] py-2 resize-y;
+}
+
+/* Focus styles */
+.input:focus {
+  @apply border-blue-500 ring-2 ring-blue-500 ring-opacity-20;
+}
+
+/* Invalid state */
+.input:invalid {
+  @apply border-error-500;
+}
+
+/* Autofill styles */
+.input:-webkit-autofill {
+  @apply shadow-[inset_0_0_0px_1000px_rgb(255,255,255)];
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .input {
+    @apply text-base; /* Prevent zoom on iOS */
+  }
+}
+
+/* Dark mode support (if needed) */
+@media (prefers-color-scheme: dark) {
+  .input {
+    @apply bg-gray-800 border-gray-600 text-white;
+  }
+  
+  .input:focus {
+    @apply border-primary-400 ring-primary-400;
+  }
+  
+  .label {
+    @apply text-gray-300;
+  }
+  
+  .helperText {
+    @apply text-gray-400;
+  }
+}

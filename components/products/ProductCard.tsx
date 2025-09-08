@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Product } from '@/lib/types'
 import { formatTHB, isLowStock } from '@/lib/utils'
+import { useCart } from '@/components/providers/CartProvider'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
@@ -35,25 +36,18 @@ export default function ProductCard({ product }: ProductCardProps) {
   const isOutOfStock = product.stock === 0
   const isLowStockItem = isLowStock(product.stock)
 
+  const { addItem } = useCart()
+
   const handleQuickAdd = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
     
     if (isOutOfStock) return
     
-    // Add to cart logic (local storage)
-    const cartItems = JSON.parse(localStorage.getItem('cart') || '[]')
-    const existingItem = cartItems.find((item: any) => item.id === product.id)
+    // Add to cart using Cart Context
+    addItem(product)
     
-    if (existingItem) {
-      existingItem.quantity += 1
-    } else {
-      cartItems.push({ ...product, quantity: 1 })
-    }
-    
-    localStorage.setItem('cart', JSON.stringify(cartItems))
-    
-    // Show feedback (you could use a toast library here)
+    // Show feedback
     const button = e.target as HTMLButtonElement
     const originalText = button.textContent
     button.textContent = '✓ เพิ่มแล้ว'

@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation'
 import Image from 'next/image'
 import { getProducts } from '@/lib/api'
 import { formatTHB, isLowStock } from '@/lib/utils'
+import { useCart } from '@/components/providers/CartProvider'
 import Button from '@/components/ui/Button'
 import Badge from '@/components/ui/Badge'
 import Card from '@/components/ui/Card'
@@ -35,6 +36,7 @@ export default function ProductDetailPage() {
   const productId = params.id as string
   const [quantity, setQuantity] = useState(1)
   const [isAddedToCart, setIsAddedToCart] = useState(false)
+  const { addItem } = useCart()
 
   const { data: productsResponse, isLoading, error } = useQuery({
     queryKey: ['products'],
@@ -45,17 +47,13 @@ export default function ProductDetailPage() {
   const product = products.find(p => p.id.toString() === productId)
 
   const handleAddToCart = () => {
-    // Simulate adding to cart (local storage)
-    const cartItems = JSON.parse(localStorage.getItem('cart') || '[]')
-    const existingItem = cartItems.find((item: any) => item.id === product?.id)
+    if (!product) return
     
-    if (existingItem) {
-      existingItem.quantity += quantity
-    } else {
-      cartItems.push({ ...product, quantity })
+    // Add to cart using Cart Context
+    for (let i = 0; i < quantity; i++) {
+      addItem(product)
     }
     
-    localStorage.setItem('cart', JSON.stringify(cartItems))
     setIsAddedToCart(true)
     
     // Reset after 2 seconds

@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import QueryProvider from '@/components/providers/QueryProvider'
+import { CartProvider } from '@/components/providers/CartProvider'
+import Navigation from '@/components/layout/Navigation'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,7 +28,8 @@ export default function RootLayout({
     <html lang="th" className="h-full">
       <body className={`${inter.className} h-full antialiased`}>
         <QueryProvider>
-          <div className="min-h-full">
+          <CartProvider>
+            <div className="min-h-full">
             <header className="bg-white shadow-sm border-b border-gray-200">
               <div className="container">
                 <div className="flex items-center justify-between h-16">
@@ -35,20 +38,7 @@ export default function RootLayout({
                       Mini E-commerce
                     </h1>
                   </div>
-                  <nav className="hidden md:flex items-center space-x-6">
-                    <a 
-                      href="/" 
-                      className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors"
-                    >
-                      Dashboard
-                    </a>
-                    <a 
-                      href="/products" 
-                      className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors"
-                    >
-                      Products
-                    </a>
-                  </nav>
+                  <Navigation />
                 </div>
               </div>
             </header>
@@ -62,7 +52,8 @@ export default function RootLayout({
                 </div>
               </div>
             </footer>
-          </div>
+            </div>
+          </CartProvider>
         </QueryProvider>
       </body>
     </html>

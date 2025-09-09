@@ -1,64 +1,68 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import { useParams } from 'next/navigation'
-import Image from 'next/image'
-import { getProducts } from '@/lib/api'
-import { formatTHB, isLowStock } from '@/lib/utils'
-import { useCart } from '@/components/providers/CartProvider'
-import Button from '@/components/ui/Button'
-import Badge from '@/components/ui/Badge'
-import Card from '@/components/ui/Card'
-import Skeleton from '@/components/ui/Skeleton'
-import EmptyState from '@/components/ui/EmptyState'
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
+import Image from "next/image";
+import { getProducts } from "@/lib/api";
+import { formatTHB, isLowStock } from "@/lib/utils";
+import { useCart } from "@/components/providers/CartProvider";
+import Button from "@/components/ui/Button";
+import Badge from "@/components/ui/Badge";
+import Card from "@/components/ui/Card";
+import Skeleton from "@/components/ui/Skeleton";
+import EmptyState from "@/components/ui/EmptyState";
 
 // Helper function to get valid image source
 function getValidImageSrc(imageSrc: string | undefined): string {
-  if (!imageSrc) return '/placeholder-product.svg'
-  
+  if (!imageSrc) return "/placeholder-product.svg";
+
   // Check if it's a relative path starting with /images/ (which doesn't exist)
-  if (imageSrc.startsWith('/images/')) {
-    return '/placeholder-product.svg'
+  if (imageSrc.startsWith("/images/")) {
+    return "/placeholder-product.svg";
   }
-  
+
   // Check if it's a valid URL
   try {
-    new URL(imageSrc)
-    return imageSrc
+    new URL(imageSrc);
+    return imageSrc;
   } catch {
-    return '/placeholder-product.svg'
+    return "/placeholder-product.svg";
   }
 }
 
 export default function ProductDetailPage() {
-  const params = useParams()
-  const productId = params.id as string
-  const [quantity, setQuantity] = useState(1)
-  const [isAddedToCart, setIsAddedToCart] = useState(false)
-  const { addItem } = useCart()
+  const params = useParams();
+  const productId = params.id as string;
+  const [quantity, setQuantity] = useState(1);
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const { addItem } = useCart();
 
-  const { data: productsResponse, isLoading, error } = useQuery({
-    queryKey: ['products'],
-    queryFn: getProducts,
-  })
+  const {
+    data: productsResponse,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: () => getProducts({}),
+  });
 
-  const products = productsResponse?.data || []
-  const product = products.find(p => p.id.toString() === productId)
+  const products = productsResponse?.data || [];
+  const product = products.find((p) => p.id.toString() === productId);
 
   const handleAddToCart = () => {
-    if (!product) return
-    
+    if (!product) return;
+
     // Add to cart using Cart Context
     for (let i = 0; i < quantity; i++) {
-      addItem(product)
+      addItem(product);
     }
-    
-    setIsAddedToCart(true)
-    
+
+    setIsAddedToCart(true);
+
     // Reset after 2 seconds
-    setTimeout(() => setIsAddedToCart(false), 2000)
-  }
+    setTimeout(() => setIsAddedToCart(false), 2000);
+  };
 
   if (isLoading) {
     return (
@@ -81,30 +85,34 @@ export default function ProductDetailPage() {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   if (error || !product) {
     return (
       <div className="container py-8">
-        <EmptyState 
+        <EmptyState
           title="ไม่พบสินค้า"
           description="สินค้าที่คุณค้นหาไม่มีอยู่ในระบบ"
         />
       </div>
-    )
+    );
   }
 
-  const isOutOfStock = product.stock === 0
-  const isLowStockItem = isLowStock(product.stock)
+  const isOutOfStock = product.stock === 0;
+  const isLowStockItem = isLowStock(product.stock);
 
   return (
     <div className="container py-8">
       {/* Breadcrumb */}
       <nav className="mb-8 text-sm text-gray-600">
-        <a href="/" className="hover:text-primary-600">หน้าแรก</a>
+        <a href="/" className="hover:text-primary-600">
+          หน้าแรก
+        </a>
         <span className="mx-2">/</span>
-        <a href="/products" className="hover:text-primary-600">สินค้าทั้งหมด</a>
+        <a href="/products" className="hover:text-primary-600">
+          สินค้าทั้งหมด
+        </a>
         <span className="mx-2">/</span>
         <span className="text-gray-900">{product.name}</span>
       </nav>
@@ -116,14 +124,14 @@ export default function ProductDetailPage() {
             <div className="aspect-square relative">
               <Image
                 src={getValidImageSrc(product.image)}
-                alt={product.name || 'Product image'}
+                alt={product.name || "Product image"}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  target.src = '/placeholder-product.svg';
+                  target.src = "/placeholder-product.svg";
                 }}
               />
             </div>
@@ -138,9 +146,7 @@ export default function ProductDetailPage() {
             </h1>
             <div className="flex items-center gap-2 mb-4">
               <Badge variant="secondary">{product.category}</Badge>
-              {isOutOfStock && (
-                <Badge variant="error">สินค้าหมด</Badge>
-              )}
+              {isOutOfStock && <Badge variant="error">สินค้าหมด</Badge>}
               {!isOutOfStock && isLowStockItem && (
                 <Badge variant="warning">เหลือน้อย</Badge>
               )}
@@ -164,10 +170,15 @@ export default function ProductDetailPage() {
               <span className="text-sm font-medium text-gray-700">
                 จำนวนคงเหลือ:
               </span>
-              <span className={`text-sm font-semibold ${
-                isOutOfStock ? 'text-error-500' : 
-                isLowStockItem ? 'text-warning-500' : 'text-success-500'
-              }`}>
+              <span
+                className={`text-sm font-semibold ${
+                  isOutOfStock
+                    ? "text-error-500"
+                    : isLowStockItem
+                      ? "text-warning-500"
+                      : "text-success-500"
+                }`}
+              >
                 {product.stock} ชิ้น
               </span>
             </div>
@@ -189,7 +200,9 @@ export default function ProductDetailPage() {
                     {quantity}
                   </span>
                   <button
-                    onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
+                    onClick={() =>
+                      setQuantity(Math.min(product.stock, quantity + 1))
+                    }
                     className="px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                     disabled={quantity >= product.stock}
                   >
@@ -206,10 +219,13 @@ export default function ProductDetailPage() {
                 className="w-full"
                 size="lg"
               >
-                {isAddedToCart ? '✓ เพิ่มลงตะกร้าแล้ว' : 
-                 isOutOfStock ? 'สินค้าหมด' : 'เพิ่มลงตะกร้า'}
+                {isAddedToCart
+                  ? " เพิ่มลงตะกร้าแล้ว"
+                  : isOutOfStock
+                    ? "สินค้าหมด"
+                    : "เพิ่มลงตะกร้า"}
               </Button>
-              
+
               {!isOutOfStock && (
                 <div className="text-sm text-gray-600 text-center">
                   รวม: {formatTHB(product.price * quantity)}
@@ -226,11 +242,11 @@ export default function ProductDetailPage() {
             <div className="space-y-1 text-sm text-gray-600">
               <div>รหัสสินค้า: #{product.id}</div>
               <div>หมวดหมู่: {product.category}</div>
-              <div>สถานะ: {isOutOfStock ? 'สินค้าหมด' : 'พร้อมจำหน่าย'}</div>
+              <div>สถานะ: {isOutOfStock ? "สินค้าหมด" : "พร้อมจำหน่าย"}</div>
             </div>
           </Card>
         </div>
       </div>
     </div>
-  )
+  );
 }

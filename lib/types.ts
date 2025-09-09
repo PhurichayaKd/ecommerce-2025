@@ -1,6 +1,6 @@
 // Product related types
 export interface Product {
-  id: string | number
+  id:  number
   name: string
   description: string
   price: number

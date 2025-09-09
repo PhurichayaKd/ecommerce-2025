@@ -495,7 +495,7 @@ export const productApi = {
   },
 
   // Get product by ID from both APIs
-  getProductById: async (id: string): Promise<ApiResponse<Product>> => {
+  getProductById: async (id: number): Promise<ApiResponse<Product>> => {
     const results = {
       real: null as any,
       mock: null as any,

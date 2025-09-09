@@ -557,7 +557,7 @@ export const productApi = {
   },
 
   // Sync product between APIs (create in Real API if exists in Mock)
-  syncProduct: async (id: string): Promise<ApiResponse<Product>> => {
+  syncProduct: async (id: number): Promise<ApiResponse<Product>> => {
     try {
       // Get product from Mock API
       const mockResponse = await fetch(`${MOCK_API_URL}/ecomerce`, {

@@ -17,15 +17,15 @@ interface CartState {
 
 type CartAction =
   | { type: "ADD_ITEM"; payload: Product }
-  | { type: "REMOVE_ITEM"; payload: string }
-  | { type: "UPDATE_QUANTITY"; payload: { id: string; quantity: number } }
+  | { type: "REMOVE_ITEM"; payload: number }
+  | { type: "UPDATE_QUANTITY"; payload: { id: number; quantity: number } }
   | { type: "CLEAR_CART" };
 
 interface CartContextType {
   state: CartState;
   addItem: (product: Product) => void;
-  removeItem: (id: string) => void;
-  updateQuantity: (id: string, quantity: number) => void;
+  removeItem: (id: number) => void;
+  updateQuantity: (id: number, quantity: number) => void;
   clearCart: () => void;
 }
 
@@ -138,11 +138,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
     dispatch({ type: "ADD_ITEM", payload: product });
   };
 
-  const removeItem = (id: string) => {
+  const removeItem = (id: number) => {
     dispatch({ type: "REMOVE_ITEM", payload: id });
   };
 
-  const updateQuantity = (id: string, quantity: number) => {
+  const updateQuantity = (id: number, quantity: number) => {
     dispatch({ type: "UPDATE_QUANTITY", payload: { id, quantity } });
   };
 

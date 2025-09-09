@@ -24,12 +24,12 @@ export default function CartItem({ item }: CartItemProps) {
     setQuantity(newQuantity);
     const numQuantity = parseInt(newQuantity);
     if (!isNaN(numQuantity) && numQuantity >= 0) {
-      updateQuantity(product.id.toString(), numQuantity);
+      updateQuantity(product.id, numQuantity);
     }
   };
 
   const handleRemove = () => {
-    removeItem(product.id.toString());
+    removeItem(product.id);
   };
 
   const totalPrice = (product.price || 0) * item.quantity;

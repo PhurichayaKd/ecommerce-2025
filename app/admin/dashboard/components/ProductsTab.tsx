@@ -9,9 +9,6 @@ import {
   faTrash,
   faChevronLeft,
   faChevronRight,
-  faRotate,
-  faList,
-  faSpaghettiMonsterFlying,
   faRectangleList,
 } from "@fortawesome/free-solid-svg-icons";
 import Button from "@/components/ui/Button";
@@ -213,103 +210,6 @@ export default function ProductsTab({ products }: ProductsTabProps) {
     });
     setShowProductModal(true);
   };
-
-  // Handle sync product from Mock to Real API
-  const handleSyncProduct = async (productId: number) => {
-    const id = productId;
-
-    if (id > 79) {
-      alert("สินค้านี้อยู่ใน Real API แล้ว\n\nไม่จำเป็นต้องซิงค์");
-      return;
-    }
-
-    if (
-      !confirm(
-        `ซิงค์สินค้า ID: ${productId} จาก Mock API ไป Real API?\n\nจะสร้างสินค้าใหม่ใน Real API (ID ใหม่จะเป็น 80+)`
-      )
-    )
-      return;
-
-    try {
-      // Import syncProduct function
-      const { productApi } = await import("@/lib/api");
-
-      const result = await productApi.syncProduct(productId);
-
-      if (result.success) {
-        alert(
-          `ซิงค์สินค้าสำเร็จ!\n${result.message || ""}\n\nสินค้าใหม่ถูกสร้างใน Real API`
-        );
-        window.location.reload();
-      } else {
-        throw new Error("Sync operation failed");
-      }
-    } catch (error) {
-      console.error("Error syncing product:", error);
-      alert(`เกิดข้อผิดพลาดในการซิงค์สินค้า:\n${error}`);
-    }
-  };
-
-  // Handle bulk sync all products from Mock to Real API
-  const handleBulkSync = async () => {
-    // Filter only Mock API products (ID 1-79)
-    const mockProducts = products.filter((p) => parseInt(p.id) <= 79);
-
-    if (mockProducts.length === 0) {
-      alert("ไม่มีสินค้าจาก Mock API ให้ซิงค์");
-      return;
-    }
-
-    if (
-      !confirm(
-        `ซิงค์สินค้าจาก Mock API ${mockProducts.length} รายการไป Real API?\n\n(เฉพาะ ID 1-79 เท่านั้น)\nอาจใช้เวลาสักครู่...`
-      )
-    )
-      return;
-
-    try {
-      const { productApi } = await import("@/lib/api");
-
-      let successCount = 0;
-      let errorCount = 0;
-      const errors: string[] = [];
-
-      // Show progress
-      alert("เริ่มซิงค์ข้อมูล... กรุณารอสักครู่");
-
-      for (const product of mockProducts) {
-        try {
-          await productApi.syncProduct(product.id);
-          successCount++;
-          console.log(`✅ Synced product ${product.id}: ${product.name}`);
-        } catch (error) {
-          errorCount++;
-          errors.push(`${product.id}: ${error}`);
-          console.error(`❌ Failed to sync product ${product.id}:`, error);
-        }
-      }
-
-      const message = `ซิงค์เสร็จสิ้น!\n\n✅ สำเร็จ: ${successCount} รายการ\n❌ ล้มเหลว: ${errorCount} รายการ`;
-
-      if (errors.length > 0 && errors.length <= 5) {
-        alert(`${message}\n\nข้อผิดพลาด:\n${errors.slice(0, 5).join("\n")}`);
-      } else if (errors.length > 5) {
-        alert(
-          `${message}\n\nมีข้อผิดพลาด ${errors.length} รายการ (ดูใน Console)`
-        );
-      } else {
-        alert(message);
-      }
-
-      if (successCount > 0) {
-        window.location.reload();
-      }
-    } catch (error) {
-      console.error("Error in bulk sync:", error);
-      alert(`เกิดข้อผิดพลาดในการซิงค์:\n${error}`);
-    }
-  };
-
   return (
     <div>
       <div className="card p-6">
@@ -320,16 +220,6 @@ export default function ProductsTab({ products }: ProductsTabProps) {
           </h3>
           <div className="flex items-center gap-4">
             <div className="flex gap-2">
-              <Button
-                onClick={() => handleBulkSync()}
-                variant="outline"
-                className="text-green-600 border-green-600 hover:bg-green-50"
-                title="ซิงค์สินค้า ID 1-79 จาก Mock API ไป Real API"
-              >
-                <FontAwesomeIcon icon={faRotate} className="mr-2" />
-                Sync Mock → Real (
-                {products.filter((p) => parseInt(p.id) <= 79).length})
-              </Button>
               <Button
                 onClick={() => {
                   resetProductForm();
@@ -491,14 +381,14 @@ export default function ProductsTab({ products }: ProductsTabProps) {
                       {parseInt(product.id) <= 79 ? (
                         // Mock API products (ID 1-79) - Read-only
                         <>
-                          <button
+                          {/* <button
                             onClick={() => handleSyncProduct(product.id)}
                             className="text-green-600 hover:text-green-900 px-2 py-1 text-xs"
                             title="ซิงค์จาก Mock API ไป Real API"
                           >
                             <FontAwesomeIcon icon={faSync} className="mr-2" />{" "}
                             Sync
-                          </button>
+                          </button> */}
                           <span
                             className="text-gray-400 px-2 py-1 text-xs"
                             title="สินค้าจาก Mock API - ไม่สามารถแก้ไขหรือลบได้"

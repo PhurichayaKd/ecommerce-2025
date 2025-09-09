@@ -10,7 +10,7 @@ import {
 const MOCK_API_URL =
   "https://f0de5f29-9d77-419c-8be9-169ccb882360.mock.pstmn.io";
 const REAL_API_URL = "http://54.169.154.143:3470";
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ||REAL_API_URL ||MOCK_API_URL;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ||REAL_API_URL ;
 const DEFAULT_HEADERS = {
   "Content-Type": "application/json",
 };

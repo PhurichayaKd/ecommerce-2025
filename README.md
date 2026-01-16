@@ -2,7 +2,7 @@
 
 A modern, responsive e-commerce application built with Next.js 15, TypeScript, and Tailwind CSS.
 
-## 🚀 Features
+## Features
 
 - **Modern Tech Stack**: Next.js 15, TypeScript, Tailwind CSS
 - **Responsive Design**: Mobile-first approach with beautiful UI components
@@ -14,7 +14,7 @@ A modern, responsive e-commerce application built with Next.js 15, TypeScript, a
 - **Dark Mode**: Built-in theme switching
 - **CI/CD**: Automated testing and deployment
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework**: [Next.js 15](https://nextjs.org/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
@@ -25,7 +25,7 @@ A modern, responsive e-commerce application built with Next.js 15, TypeScript, a
 - **Testing**: Jest, React Testing Library
 - **Deployment**: Vercel
 
-## 📦 Project Structure
+## Project Structure
 
 ```
 ecommerce-2025/
@@ -49,7 +49,7 @@ ecommerce-2025/
 └── .github/           # GitHub workflows
 ```
 
-## 🚦 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -80,7 +80,7 @@ yarn dev
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 📜 Available Scripts
+## Available Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
@@ -92,7 +92,7 @@ yarn dev
 - `npm run test:watch` - Run tests in watch mode
 - `npm run test:coverage` - Run tests with coverage
 
-## 🎨 UI Components
+## UI Components
 
 The project includes a comprehensive set of reusable UI components:
 
@@ -105,7 +105,7 @@ The project includes a comprehensive set of reusable UI components:
 - **EmptyState** - Empty content placeholders
 - **Pagination** - Navigation controls
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -120,7 +120,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
 The project uses a custom Tailwind configuration with design tokens defined in `styles/tokens.css`.
 
-## 🧪 Testing
+## Testing
 
 The project uses Jest and React Testing Library for testing:
 
@@ -135,7 +135,7 @@ npm run test:watch
 npm run test:coverage
 ```
 
-## 🚀 Deployment
+## Deployment
 
 ### Vercel (Recommended)
 
@@ -153,7 +153,7 @@ npm run build
 npm run start
 ```
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -161,7 +161,7 @@ npm run start
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📝 Code Style
+## Code Style
 
 This project follows strict code style guidelines:
 
@@ -170,25 +170,25 @@ This project follows strict code style guidelines:
 - **TypeScript**: For type safety
 - **Conventional Commits**: For commit messages
 
-## 🐛 Bug Reports
+## Bug Reports
 
 If you find a bug, please create an issue using the bug report template.
 
-## 💡 Feature Requests
+## Feature Requests
 
 For feature requests, please use the feature request template.
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [Next.js](https://nextjs.org/) for the amazing framework
 - [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
 - [Vercel](https://vercel.com/) for hosting and deployment
 
-## 📞 Support
+## Support
 
 If you have any questions or need help, please:
 
@@ -197,5 +197,3 @@ If you have any questions or need help, please:
 3. Create a new issue if needed
 
 ---
-
-Made with ❤️ by [Your Name](https://github.com/yourusername)
